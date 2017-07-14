@@ -2,9 +2,7 @@ package zone.com.retrofitlisthelper;
 
 import android.view.View;
 import android.widget.PopupWindow;
-
 import java.lang.reflect.Proxy;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -15,6 +13,8 @@ import zone.com.retrofitlisthelper.gank.GankImpl;
 
 /**
  * [2017] by Zone
+ *
+ * 测试各种泛型
  */
 
 public class BindTest {

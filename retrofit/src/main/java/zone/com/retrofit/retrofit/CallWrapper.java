@@ -3,9 +3,7 @@ package zone.com.retrofit.retrofit;
 import android.app.Dialog;
 import android.support.annotation.NonNull;
 import android.view.View;
-
 import java.io.IOException;
-
 import ezy.ui.layout.LoadingLayout;
 import okhttp3.Request;
 import retrofit2.Call;
@@ -185,7 +183,7 @@ public class CallWrapper<T> implements Call<T> {
         @Override
         public void onLoading(final State state) {
             if (state != State.Loading)
-                HandlerUiUtil.runOnUiThreadDelay(new Runnable() {
+                HandlerUiUtil.postDelay(new Runnable() {
                     @Override
                     public void run() {
                         onLoadingReal(state);

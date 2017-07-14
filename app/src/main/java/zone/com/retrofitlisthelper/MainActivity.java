@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case Success:
                             case Error:
-                                HandlerUiUtil.runOnUiThreadDelay(new Runnable() {
+                                HandlerUiUtil.postDelay(new Runnable() {
                                     @Override
                                     public void run() {
                                         dialog.dismiss();

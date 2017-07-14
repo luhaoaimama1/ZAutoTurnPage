@@ -38,7 +38,7 @@ public abstract class ZonePullView<E> extends BasePullView<ZRefreshLayout, Recyc
         pullView.setLoadMoreListener(true, new ZRefreshLayout.LoadMoreListener() {
             @Override
             public void loadMore(ZRefreshLayout zRefreshLayout) {
-                HandlerUiUtil.runOnUiThreadDelay(new Runnable() {
+                HandlerUiUtil.postDelay(new Runnable() {
                     @Override
                     public void run() {
                         Log.d("heihei", "加载页面：" + offset);
@@ -94,12 +94,6 @@ public abstract class ZonePullView<E> extends BasePullView<ZRefreshLayout, Recyc
     public void doLast(boolean successful, Call<E> call, Response<E> response, Throwable t) {
         onRefreshComplete();
         onLoadMoreComplete();
-        if(mLoadingLayout !=null){
-            if(successful){
-                mLoadingLayout.showContent();
-            } else
-                mLoadingLayout.showError();
-        }
     }
 
     @Override

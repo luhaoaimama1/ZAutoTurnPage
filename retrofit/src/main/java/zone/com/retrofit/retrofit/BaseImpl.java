@@ -24,16 +24,13 @@ package zone.com.retrofit.retrofit;
 
 import android.app.Dialog;
 import android.widget.PopupWindow;
-
 import java.lang.reflect.ParameterizedType;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
-
 /**
  * 实现类，具体实现在此处
  * @param <Service>

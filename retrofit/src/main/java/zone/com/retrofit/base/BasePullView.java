@@ -10,6 +10,7 @@ import ezy.ui.layout.LoadingLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import zone.com.retrofit.retrofit.CallWrapper;
 import zone.com.retrofit.utils.Utils;
 
 /**
@@ -43,23 +44,16 @@ public abstract class BasePullView<P, L, A, E, D> {
         this.data = data;
     }
 
-    LoadingLayout mLoadingLayout;
 
-    public void firstLoading(final int offset, final LoadingLayout mLoadingLayout) {
+    public void firstLoading(int offset, LoadingLayout mLoadingLayout) {
         this.offset = offset;
-        this.mLoadingLayout=mLoadingLayout;
-        if (Utils.haveNetWork(context)) {
-            bindRefreshEngine(request(offset, limit));
-            mLoadingLayout.showLoading();
-        } else {
-            mLoadingLayout.showError();
-            mLoadingLayout.setRetryListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    firstLoading(offset, mLoadingLayout);
-                }
-            });
-        }
+        Call<E> callBack = request(offset, limit);
+        CallWrapper<E> callWrapper;
+        if (callBack instanceof CallWrapper)
+            callWrapper = new CallWrapper(callBack);
+        else
+            callWrapper = (CallWrapper<E>) callBack;
+        bindRefreshEngine(callWrapper.firstLoading(mLoadingLayout));
     }
 
 

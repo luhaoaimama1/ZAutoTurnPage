@@ -89,7 +89,7 @@ public class ListActivity extends AppCompatActivity {
         zonePullView.setFirstNumber(5);
 
 
-        HandlerUiUtil.runOnUiThreadDelay(new Runnable() {
+        HandlerUiUtil.postDelay(new Runnable() {
             @Override
             public void run() {
 //                refresh.autoRefresh(true);
