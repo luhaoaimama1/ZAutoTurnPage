@@ -20,25 +20,17 @@
  * Weibo:   http://weibo.com/GcsSloop
  */
 
-package zone.com.retrofitlisthelper.gank;
-import retrofit2.Call;
-import zone.com.retrofit.retrofit.BaseImpl;
+package zone.com.retrofitlisthelper.gank2;
+
+
 import zone.com.retrofit.retrofit.CallWrapper;
 import zone.com.retrofitlisthelper.MeiZiData;
 
-//ListHelper.bindEngine()
-/**
- *GankImpl.pop(listener{
- *
- *})
- *
- * getPics(String limit, String pageNumber).pop/dialog/popListener().enquene(callback());
- */
-public class GankImpl extends BaseImpl<GankService> implements GankAPI {
+public interface GankAPI2 {
 
-    @Override
-    public CallWrapper<MeiZiData> getPics(String limit, String pageNumber) {
-        return wrapper(mService.getPics(limit,pageNumber));
-    }
+    //--- login ------------------------------------------------------------------------------------
+
+    CallWrapper<MeiZiData> getPics(String limit, String pageNumber,String hei);
+
 
 }
