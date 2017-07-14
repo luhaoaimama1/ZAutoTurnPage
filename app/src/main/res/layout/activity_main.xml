@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/bt_pop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pop" />
+
+    <Button
+        android:id="@+id/bt_Dlg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dialog" />
+
+    <Button
+        android:id="@+id/bt_FristLoading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FristLoading" />
+    <Button
+        android:id="@+id/bt_DelayDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="delayDialog" />
+    <Button
+        android:id="@+id/bt_List"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List" />
+
+
+</LinearLayout>
