@@ -1,0 +1,18 @@
+
+
+1.token
+
+2.cookies
+
+3.https
+
+4.file上传 ,下载 包含进度条
+
+====>
+//todo 最后的callback 用 event处理好 还是 rx 还是默认的 callback呢？
+
+5.glide支持 并支持进度条
+
+
+
+

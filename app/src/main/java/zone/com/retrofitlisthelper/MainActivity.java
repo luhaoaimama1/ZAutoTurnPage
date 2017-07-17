@@ -12,11 +12,12 @@ import ezy.ui.layout.LoadingLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import zone.com.retrofit.retrofit.CallWrapper;
+import zone.com.retrofit.callwrapper.DialogCall;
 import zone.com.retrofit.utils.HandlerUiUtil;
 import zone.com.retrofit.views.LoadingDialog;
 import zone.com.retrofit.views.LoadingPopWindow;
-import zone.com.retrofitlisthelper.gank.GankImpl;
+import zone.com.retrofitlisthelper.net.API.gank.api.GankImpl;
+import zone.com.retrofitlisthelper.net.API.gank.bean.MeiZiData;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,12 +43,13 @@ public class MainActivity extends AppCompatActivity {
                 .enqueue(new Callback<MeiZiData>() {
                     @Override
                     public void onResponse(Call<MeiZiData> call, Response<MeiZiData> response) {
-
+                        //UI线程
+                        System.out.println("1");
                     }
 
                     @Override
                     public void onFailure(Call<MeiZiData> call, Throwable t) {
-
+                        System.out.println("2");
                     }
                 });
     }
@@ -75,9 +77,9 @@ public class MainActivity extends AppCompatActivity {
         final LoadingDialog dialog = new LoadingDialog(this);
         new GankImpl()
                 .getPics("5", "5")
-                .OnLoadingListener(new CallWrapper.OnLoadingListener() {
+                .OnLoadingListener(new DialogCall.OnLoadingListener() {
                     @Override
-                    public void onLoading(CallWrapper.State state) {
+                    public void onLoading(DialogCall.State state) {
                         switch (state) {
                             case Loading:
                                 dialog.show();
