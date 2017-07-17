@@ -62,7 +62,7 @@ public class BaseImpl<Service> {
             context = Config.getInstance().getContext();
             if (context == null)
                 throw new IllegalStateException("Please use method Config.getInstance().setContext(context)");
-            mCacheUtil = new CacheUtil(Config.getInstance().getContext());
+            mCacheUtil = new CacheUtil(context);
         }
         initRetrofit();
         this.mService = mRetrofit.create(getServiceClass());
