@@ -87,6 +87,7 @@ public class ListActivity extends AppCompatActivity {
                 datas.addAll(body.getResults());
             }
         };
+        //刷新的offset开始
         zonePullView.setFirstNumber(5);
 
 
@@ -94,6 +95,7 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void run() {
 //                refresh.autoRefresh(true);
+                //第一次请求
                 zonePullView.firstLoading(5, LoadingLayout.wrap(llRoot));
             }
         }, 500);

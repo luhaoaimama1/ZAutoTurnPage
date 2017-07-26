@@ -24,9 +24,10 @@ package zone.com.retrofitlisthelper.net.API.gank2.api;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import zone.com.retrofit.callwrapper.DialogCall;
 import zone.com.retrofitlisthelper.net.API.gank.bean.MeiZiData;
 
-interface Gank2Service {
+ interface Gank2Service {
 
     //--- Token ------------------------------------------------------------------------------------
 

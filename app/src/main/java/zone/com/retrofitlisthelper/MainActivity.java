@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.bt_rxjavaSync)
     public void onRxjavaSyncClick() {
-        new Gank2Impl().getPics("5", "5", "2")
+        new Gank2Impl().getPics("5", "2",2)
                 .popWindow(new LoadingPopWindow(this))
-                .delay(5000)
+                .delayDismiss(5000)
                 .enqueueObservable()
                 .subscribe(o -> System.out.println("妹子==>：" + GsonUtils.toJson(o))
                         , throwable -> System.out.println("异常==>" + throwable)
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.bt_rxjava)
     public void onRxjavaClick() {
-        new Gank2Impl().getPics("5", "5", "2")
+        new Gank2Impl().getPics( "5", "2",2)
                 .executeObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         new GankImpl()
                 .getPics("5", "5")
                 .popWindow(new LoadingPopWindow(this))
-                .delay(5000)
+                .delayDismiss(5000)
                 .enqueue(new Callback<MeiZiData>() {
                     @Override
                     public void onResponse(Call<MeiZiData> call, Response<MeiZiData> response) {

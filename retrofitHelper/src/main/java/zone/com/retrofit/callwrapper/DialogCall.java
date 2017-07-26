@@ -106,7 +106,7 @@ public class DialogCall<T> implements Call<T> {
     // =======================================
 
 
-    public DialogCall<T> delay(long delayMillis) {
+    public DialogCall<T> delayDismiss(long delayMillis) {
         this.delayMillis = delayMillis;
         return this;
     }

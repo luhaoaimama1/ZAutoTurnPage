@@ -21,6 +21,7 @@
  */
 
 package zone.com.retrofitlisthelper.net.API.gank2.api;
+import retrofit2.Call;
 import zone.com.retrofitlisthelper.net.base.BaseImpl;
 import zone.com.retrofit.callwrapper.DialogCall;
 import zone.com.retrofitlisthelper.net.API.gank.bean.MeiZiData;
@@ -36,9 +37,9 @@ import zone.com.retrofitlisthelper.net.API.gank.bean.MeiZiData;
  */
 public class Gank2Impl extends BaseImpl<Gank2Service> implements Gank2API {
 
+    //第三个参数主要是为了 APIController2类的测试
     @Override
-    public DialogCall<MeiZiData> getPics(String limit, String pageNumber, String hei) {
+    public DialogCall<MeiZiData> getPics(String limit, String pageNumber, int noUse) {
         return dialogWrapper(mService.getPics(limit,pageNumber));
     }
-
 }

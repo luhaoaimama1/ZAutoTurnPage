@@ -30,7 +30,5 @@ public interface Gank2API {
 
     //--- login ------------------------------------------------------------------------------------
 
-    DialogCall<MeiZiData> getPics(String limit, String pageNumber, String hei);
-
-
+    DialogCall<MeiZiData> getPics(String limit, String pageNumber,int noUse);
 }

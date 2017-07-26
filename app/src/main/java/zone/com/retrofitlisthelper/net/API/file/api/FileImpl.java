@@ -13,7 +13,7 @@ import zone.com.retrofitlisthelper.net.base.BaseImpl;
  * [2017] by Zone
  */
 
-public class FileImpl extends BaseImpl<FileService> implements FileAPI {
+public class FileImpl extends BaseImpl<FileService> implements FileService {
 
     @Override
     public Call<String> uploadFile(MultipartBody.Part file) {

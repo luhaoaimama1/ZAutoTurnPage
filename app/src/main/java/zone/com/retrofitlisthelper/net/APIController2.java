@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
-
 import zone.com.retrofitlisthelper.net.API.gank.api.GankAPI;
 import zone.com.retrofitlisthelper.net.API.gank.api.GankImpl;
 import zone.com.retrofitlisthelper.net.API.gank2.api.Gank2API;
@@ -52,7 +51,7 @@ public class APIController2 {
         APICall proxy = (APICall) Proxy.newProxyInstance(
                 aPIController.getClass().getClassLoader(),
                 new Class<?>[]{APICall.class}, handler);
-        proxy.getPics("5", "5", "2");
+        proxy.getPics("5","5", 2);
         proxy.getPics("5", "5");
     }
 
