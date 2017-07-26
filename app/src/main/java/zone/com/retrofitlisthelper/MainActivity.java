@@ -9,6 +9,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ezy.ui.layout.LoadingLayout;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,6 +20,8 @@ import zone.com.retrofit.views.LoadingDialog;
 import zone.com.retrofit.views.LoadingPopWindow;
 import zone.com.retrofitlisthelper.net.API.gank.api.GankImpl;
 import zone.com.retrofitlisthelper.net.API.gank.bean.MeiZiData;
+import zone.com.retrofitlisthelper.net.API.gank2.api.Gank2Impl;
+import zone.com.retrofitlisthelper.utils.GsonUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +37,28 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
+
+    @OnClick(R.id.bt_rxjavaSync)
+    public void onRxjavaSyncClick() {
+        new Gank2Impl().getPics("5", "5", "2")
+                .popWindow(new LoadingPopWindow(this))
+                .delay(5000)
+                .enqueueObservable()
+                .subscribe(o -> System.out.println("妹子==>：" + GsonUtils.toJson(o))
+                        , throwable -> System.out.println("异常==>" + throwable)
+                        , () -> System.out.println("成功==>"));
+    }
+
+    @OnClick(R.id.bt_rxjava)
+    public void onRxjavaClick() {
+        new Gank2Impl().getPics("5", "5", "2")
+                .executeObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(o -> System.out.println("妹子==>：" + GsonUtils.toJson(o))
+                        , throwable -> System.out.println("异常==>" + throwable)
+                        , () -> System.out.println("成功==>"));
+    }
 
     @OnClick(R.id.bt_pop)
     public void onPopClick() {

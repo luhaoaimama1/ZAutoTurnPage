@@ -3,6 +3,7 @@ package zone.com.retrofitlisthelper.net.base;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -13,6 +14,7 @@ import zone.com.retrofitlib.RunConfig;
 import zone.com.retrofitlib.callwrapper.core.ProgressCallback;
 import zone.com.retrofitlisthelper.net.API.file.api.FileImpl;
 import zone.com.retrofitlib.callwrapper.RequestBodyHelper;
+import zone.com.retrofitlisthelper.net.API.gank2.api.Gank2Impl;
 
 /**
  * [2017] by Zone
@@ -27,6 +29,7 @@ public class ReftrofitTest {
         upload();
         down();
     }
+
 
     private static void down() {
         new FileImpl().downLoad().enqueue(new ProgressCallback<ResponseBody>() {

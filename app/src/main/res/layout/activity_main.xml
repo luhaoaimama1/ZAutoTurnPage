@@ -33,5 +33,16 @@
         android:layout_height="wrap_content"
         android:text="List" />
 
+    <Button
+        android:id="@+id/bt_rxjavaSync"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rxjava支持异步" />
+    <Button
+        android:id="@+id/bt_rxjava"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rxjava支持" />
+
 
 </LinearLayout>

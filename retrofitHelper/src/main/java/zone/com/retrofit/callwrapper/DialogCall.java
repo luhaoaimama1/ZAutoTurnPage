@@ -7,33 +7,44 @@ import android.view.View;
 import java.io.IOException;
 
 import ezy.ui.layout.LoadingLayout;
+import io.reactivex.Observable;
 import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import zone.com.retrofit.callwrapper.helper.CallEnqueueObservable;
+import zone.com.retrofit.callwrapper.helper.CallExecuteObservable;
 import zone.com.retrofit.utils.HandlerUiUtil;
 import zone.com.retrofit.views.BasePopWindow;
 
 public class DialogCall<T> implements Call<T> {
 
-    private final Call<T> call;
-    private boolean mNeedCloneCall;
+    private Call<T> call;
     private LoadingLayout mLoadingLayout;
     private BasePopWindow mPopWindow;
     private Dialog mDialog;
     private Callback<T> mCallback;
     private long delayMillis;
 
+    //default 空实现
     private OnLoadingListener mOnLoadingListener = new OnLoadingListener() {
         @Override
         public void onLoading(State state) {
-
         }
     };
 
 
     public DialogCall(Call<T> call) {
         this.call = call;
+    }
+
+
+    public void setCall(Call<T> call) {
+        this.call = call;
+    }
+
+    public Call<T> getCall() {
+        return call;
     }
 
     // =======================================
@@ -69,20 +80,24 @@ public class DialogCall<T> implements Call<T> {
         return call.request();
     }
 
-
     @Override
     public void enqueue(@NonNull Callback callback) {
         mCallback = callback;
-        if (!(mCallback instanceof CallBackInner)) {
-            mCallback = new CallBackInner(callback, new OnLoadingListenerInner(mOnLoadingListener));
+        if (!(mCallback instanceof DialogCall.CallBackDelegate)) {
+            mCallback = new CallBackDelegate(callback, new OnLoadingListenerInner(mOnLoadingListener));
         }
-        ((CallBackInner) mCallback).onLoadingListenerInner.onLoading(State.Loading);
+        ((CallBackDelegate) mCallback).onLoadingListenerInner.onLoading(State.Loading);
+        // Since Call is a one-shot type, clone it for each new observer.
+        //采取和 retrofit一样的方案
+        call.clone().enqueue(mCallback);
+    }
 
-        if (mNeedCloneCall)
-            call.clone().enqueue(mCallback);
-        else
-            call.enqueue(mCallback);
-        mNeedCloneCall = false;
+    public Observable<T> enqueueObservable() {
+        return new CallEnqueueObservable<T>(this);
+    }
+
+    public Observable<T> executeObservable() {
+        return new CallExecuteObservable<T>(this);
     }
 
 
@@ -101,7 +116,6 @@ public class DialogCall<T> implements Call<T> {
         loadingLayout.setRetryListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNeedCloneCall = true;
                 enqueue(mCallback);
             }
         });
@@ -135,12 +149,12 @@ public class DialogCall<T> implements Call<T> {
     /**
      * 真正的实现
      */
-    private class CallBackInner<T> implements Callback<T> {
+    private class CallBackDelegate<T> implements Callback<T> {
 
         final OnLoadingListenerInner onLoadingListenerInner;
         private Callback<T> callBack;
 
-        public CallBackInner(Callback<T> callBack, @NonNull OnLoadingListenerInner onLoadingListenerInner) {
+        public CallBackDelegate(Callback<T> callBack, @NonNull OnLoadingListenerInner onLoadingListenerInner) {
             this.callBack = callBack;
             this.onLoadingListenerInner = onLoadingListenerInner;
             onLoadingListenerInner.onLoading(State.Loading);
@@ -193,7 +207,13 @@ public class DialogCall<T> implements Call<T> {
                     }
                 }, delayMillis);
             else
-                onLoadingReal(state);
+                HandlerUiUtil.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        onLoadingReal(state);
+                    }
+                });
+
         }
 
         private void onLoadingReal(State state) {
