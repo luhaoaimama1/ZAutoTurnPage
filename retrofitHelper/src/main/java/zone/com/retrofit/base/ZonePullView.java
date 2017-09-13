@@ -7,11 +7,13 @@ import com.zone.adapter3.base.IAdapter;
 
 import retrofit2.Call;
 import retrofit2.Response;
-import zone.com.retrofit.utils.HandlerUiUtil;
+import zone.com.retrofit.BasePullView;
+import zone.com.retrofitlib.utils.HandlerUiUtil;
 import zone.com.zrefreshlayout.ZRefreshLayout;
 
 /**
  * [2017] by Zone
+ * LoadingLayout 仅仅考虑第一次  第一次之后 则不考虑了
  */
 
 public abstract class ZonePullView<E> extends BasePullView<ZRefreshLayout, RecyclerView, IAdapter, E, Object> {
@@ -57,7 +59,10 @@ public abstract class ZonePullView<E> extends BasePullView<ZRefreshLayout, Recyc
     @Override
     public void onRefreshComplete() {
         if (pullView.isRefresh())
-            pullView.refreshComplete();
+            if(offset == -1)
+                adapter.end();
+            else
+                pullView.refreshComplete();
     }
 
     @Override
@@ -92,13 +97,29 @@ public abstract class ZonePullView<E> extends BasePullView<ZRefreshLayout, Recyc
 
     @Override
     public void doLast(boolean successful, Call<E> call, Response<E> response, Throwable t) {
-        onRefreshComplete();
-        onLoadMoreComplete();
+        if(pullView.isRefreshOrLoadMore()){
+            onRefreshComplete();
+            onLoadMoreComplete();
+        }else{
+            //考虑第一次loading那种
+            if(offset == -1)
+                adapter.end();
+        }
     }
 
     @Override
     public void setCanLoadMore(boolean canLoadMore) {
         pullView.setCanLoadMore(canLoadMore);
+    }
+
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public ZonePullView setLimit(int limit) {
+        this.limit = limit;
+        return this;
     }
 }
 

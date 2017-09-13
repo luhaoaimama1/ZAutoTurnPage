@@ -14,13 +14,13 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import zone.com.retrofit.callwrapper.DialogCall;
-import zone.com.retrofit.utils.HandlerUiUtil;
-import zone.com.retrofit.views.LoadingDialog;
-import zone.com.retrofit.views.LoadingPopWindow;
-import zone.com.retrofitlisthelper.net.API.gank.api.GankImpl;
-import zone.com.retrofitlisthelper.net.API.gank.bean.MeiZiData;
-import zone.com.retrofitlisthelper.net.API.gank2.api.Gank2Impl;
+import zone.com.retrofitlib.callwrapper.DialogCall;
+import zone.com.retrofitlib.utils.HandlerUiUtil;
+import zone.com.retrofitlib.views.LoadingDialog;
+import zone.com.retrofitlib.views.LoadingPopWindow;
+import zone.com.sdk.API.gank.api.GankImpl;
+import zone.com.sdk.API.gank.bean.MeiZiData;
+import zone.com.sdk.API.gank2.api.Gank2Impl;
 import zone.com.retrofitlisthelper.utils.GsonUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
                 .popWindow(new LoadingPopWindow(this))
                 .delayDismiss(5000)
                 .enqueueObservable()
-                .subscribe(o -> System.out.println("妹子==>：" + GsonUtils.toJson(o))
-                        , throwable -> System.out.println("异常==>" + throwable)
-                        , () -> System.out.println("成功==>"));
+                .subscribe(o -> System.out.println("Sync 妹子==>：" + GsonUtils.toJson(o))
+                        , throwable -> System.out.println("Sync 异常==>" + throwable)
+                        , () -> System.out.println("Sync 成功==>"));
     }
 
     @OnClick(R.id.bt_rxjava)
@@ -55,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 .executeObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(o -> System.out.println("妹子==>：" + GsonUtils.toJson(o))
-                        , throwable -> System.out.println("异常==>" + throwable)
-                        , () -> System.out.println("成功==>"));
+                .subscribe(o -> System.out.println("同步 妹子==>：" + GsonUtils.toJson(o))
+                        , throwable -> System.out.println("同步  异常==>" + throwable)
+                        , () -> System.out.println("同步  成功==>"));
     }
 
     @OnClick(R.id.bt_pop)
@@ -70,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<MeiZiData> call, Response<MeiZiData> response) {
                         //UI线程
-                        System.out.println("1");
+                        System.out.println("pop==>onResponse");
                     }
 
                     @Override
                     public void onFailure(Call<MeiZiData> call, Throwable t) {
-                        System.out.println("2");
+                        System.out.println("pop==>onFailure");
                     }
                 });
     }
@@ -88,12 +88,13 @@ public class MainActivity extends AppCompatActivity {
                 .enqueue(new Callback<MeiZiData>() {
                     @Override
                     public void onResponse(Call<MeiZiData> call, Response<MeiZiData> response) {
-
+                        //UI线程
+                        System.out.println("dialog==>onResponse");
                     }
 
                     @Override
                     public void onFailure(Call<MeiZiData> call, Throwable t) {
-
+                        System.out.println("dialog==>onFailure");
                     }
                 });
     }
@@ -143,12 +144,12 @@ public class MainActivity extends AppCompatActivity {
                 .enqueue(new Callback<MeiZiData>() {
                     @Override
                     public void onResponse(Call<MeiZiData> call, Response<MeiZiData> response) {
-
+                        System.out.println("onFristLoadingClick==>onResponse");
                     }
 
                     @Override
                     public void onFailure(Call<MeiZiData> call, Throwable t) {
-
+                        System.out.println("onFristLoadingClick==>onFailure");
                     }
                 });
     }

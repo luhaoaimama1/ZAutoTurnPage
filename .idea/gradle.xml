@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/retrofitHelper" />
             <option value="$PROJECT_DIR$/retrofitLib" />
+            <option value="$PROJECT_DIR$/sdk" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
