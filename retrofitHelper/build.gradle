@@ -34,16 +34,9 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
-    //    compile 'com.github.luhaoaimama1:ZRefreshLayout:1.0.15'
-    compile 'com.github.luhaoaimama1:ZAdapter3:1.0.2'
-    compile('com.github.luhaoaimama1:ZRefreshLayout:1.0.15', {
-        exclude group: 'com.android.support', module: 'recyclerview-v7'
-    })
     //    compile project(':zlibrary')
     compile project(':retrofitLib')
 }
-
-
 
 
 //---------------jitPack 文档注释 Start------------------------
@@ -70,3 +63,4 @@ artifacts {
     archives sourcesJar
     archives javadocJar
 }
+

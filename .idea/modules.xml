@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/retrofitHelper/retrofitHelper.iml" filepath="$PROJECT_DIR$/retrofitHelper/retrofitHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/retrofitLib/retrofitLib.iml" filepath="$PROJECT_DIR$/retrofitLib/retrofitLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/sdk/sdk.iml" filepath="$PROJECT_DIR$/sdk/sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zhelper/zhelper.iml" filepath="$PROJECT_DIR$/zhelper/zhelper.iml" />
     </modules>
   </component>
 </project>
