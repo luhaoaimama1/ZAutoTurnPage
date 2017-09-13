@@ -26,8 +26,11 @@ Step 2. Add the dependency
 ## retrofitLib
 
 -[x] 网络请求库 支持上传下载 https cookies等;
+
 -[x] 支持rxjava2
+
 -[x] 可以与dialog pop view等进行请求关联
+
 -[x] firstLoad那种 网络状态关联;
 
 ## retrofitHelper
@@ -45,6 +48,7 @@ retrofitHelper的库的具体实现
 # Easy use:
 
 使用之前配置
+
 ```
  Config.getInstance().setContext(this);
 ```
@@ -71,6 +75,7 @@ retrofitHelper的库的具体实现
 ```
 
 2.rxjava2支持
+
 ```
   Diycode.getInstance()
                 .getPics("5", "2",2)
@@ -83,6 +88,7 @@ retrofitHelper的库的具体实现
 ```
 
 3.firstLoad状态与界面关联
+
 ```
     Diycode.getInstance()
                 .getPics("5", "5")
@@ -101,6 +107,7 @@ retrofitHelper的库的具体实现
 ```
 
 4.下拉刷新与上拉加载的自动完成
+
 ```
 
         final ZonePullView zonePullView = new ZonePullView<MeiZiData>(refresh, adapter) {

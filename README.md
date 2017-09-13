@@ -27,8 +27,11 @@ Step 2. Add the dependency
 ## retrofitLib
 
 -[x] Uploads and downloads the HTTPS library support network request cookies, etc.;
+
 -[x] support rxjava2
+
 -[x] You can request associated with dialog pop view, etc
+
 -[x] FirstLoad that state of network association;
 
 ## retrofitHelper
