@@ -123,6 +123,10 @@ Before using the configuration
         };
 ```
 
+# The project practice
+
+https://github.com/NewbeeMaster/NBDiycode
+
 
 # Update log
 
