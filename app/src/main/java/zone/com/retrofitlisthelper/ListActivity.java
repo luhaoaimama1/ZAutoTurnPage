@@ -27,6 +27,7 @@ import zone.com.retrofitlib.utils.HandlerUiUtil;
 import zone.com.retrofitlib.views.LoadingAnimView;
 import zone.com.sdk.API.gank.api.GankImpl;
 import zone.com.sdk.API.gank.bean.MeiZiData;
+import zone.com.sdk.Diycode;
 import zone.com.zrefreshlayout.Config;
 import zone.com.zrefreshlayout.ZRefreshLayout;
 import zone.com.zrefreshlayout.footer.MeterialFooter;
@@ -79,7 +80,8 @@ public class ListActivity extends AppCompatActivity {
             @NonNull
             @Override
             protected Call<MeiZiData> request(int offset, int limit) {
-                return new GankImpl().getPics(offset + "", limit + "");
+                return Diycode.getInstance()
+                        .getPics(offset + "", limit + "");
             }
 
             @Override

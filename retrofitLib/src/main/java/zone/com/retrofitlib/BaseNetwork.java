@@ -47,7 +47,7 @@ public abstract class BaseNetwork<Service> {
         if (RunConfig.isAPP) {
             context = Config.getInstance().getContext();
         }
-        initConfig();
+        onCreate();
         initRetrofitInner();
         this.mService = mRetrofit.create(getServiceClass());
 
@@ -57,12 +57,14 @@ public abstract class BaseNetwork<Service> {
         return (Class<Service>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-    protected abstract void initConfig();
+    protected abstract void onCreate();
 
     private synchronized void initRetrofitInner() {
-        if (null != mRetrofit)
-            return;
-        mRetrofit=initRetrofit();
+        if(mRetrofit==null)
+            synchronized (BaseNetwork.class){
+                if (mRetrofit == null)
+                    mRetrofit=initRetrofit();
+            }
     }
 
     protected abstract Retrofit initRetrofit() ;

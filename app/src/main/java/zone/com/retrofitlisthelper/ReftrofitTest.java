@@ -11,8 +11,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import zone.com.retrofitlib.RunConfig;
 import zone.com.retrofitlib.callwrapper.core.ProgressCallback;
+import zone.com.retrofitlib.views.LoadingPopWindow;
 import zone.com.sdk.API.file.api.FileImpl;
 import zone.com.retrofitlib.callwrapper.RequestBodyHelper;
+import zone.com.sdk.API.gank.api.GankImpl;
+import zone.com.sdk.API.gank.bean.MeiZiData;
 import zone.com.sdk.API.gank2.api.Gank2Impl;
 
 /**
@@ -25,8 +28,28 @@ public class ReftrofitTest {
 
     public static void main(String[] args) {
         RunConfig.isAPP = false;
-        upload();
-//        down();
+
+//        rxjavaHttp();
+//        upload();
+        down();
+    }
+
+    private static void rxjavaHttp() {
+        new GankImpl()
+                .getPics("5", "5")
+                .delayDismiss(5000)
+                .enqueue(new Callback<MeiZiData>() {
+                    @Override
+                    public void onResponse(Call<MeiZiData> call, Response<MeiZiData> response) {
+                        //UI线程
+                        System.out.println("pop==>onResponse");
+                    }
+
+                    @Override
+                    public void onFailure(Call<MeiZiData> call, Throwable t) {
+                        System.out.println("pop==>onFailure");
+                    }
+                });
     }
 
 

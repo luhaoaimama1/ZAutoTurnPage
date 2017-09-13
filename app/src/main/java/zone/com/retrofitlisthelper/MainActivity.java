@@ -18,10 +18,9 @@ import zone.com.retrofitlib.callwrapper.DialogCall;
 import zone.com.retrofitlib.utils.HandlerUiUtil;
 import zone.com.retrofitlib.views.LoadingDialog;
 import zone.com.retrofitlib.views.LoadingPopWindow;
-import zone.com.sdk.API.gank.api.GankImpl;
 import zone.com.sdk.API.gank.bean.MeiZiData;
-import zone.com.sdk.API.gank2.api.Gank2Impl;
 import zone.com.retrofitlisthelper.utils.GsonUtils;
+import zone.com.sdk.Diycode;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.bt_rxjavaSync)
     public void onRxjavaSyncClick() {
-        new Gank2Impl().getPics("5", "2",2)
+        Diycode.getInstance()
+                .getPics("5", "2",2)
                 .popWindow(new LoadingPopWindow(this))
                 .delayDismiss(5000)
                 .enqueueObservable()
@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.bt_rxjava)
     public void onRxjavaClick() {
-        new Gank2Impl().getPics( "5", "2",2)
+        Diycode.getInstance()
+                .getPics( "5", "2",2)
                 .executeObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.bt_pop)
     public void onPopClick() {
-        new GankImpl()
+        Diycode.getInstance()
                 .getPics("5", "5")
                 .popWindow(new LoadingPopWindow(this))
                 .delayDismiss(5000)
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.bt_Dlg)
     public void onDlgClick() {
-        new GankImpl()
+        Diycode.getInstance()
                 .getPics("5", "5")
                 .dialog(new LoadingDialog(this))
                 .enqueue(new Callback<MeiZiData>() {
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.bt_DelayDialog)
     public void onDelayDialogClick() {
         final LoadingDialog dialog = new LoadingDialog(this);
-        new GankImpl()
+        Diycode.getInstance()
                 .getPics("5", "5")
                 .OnLoadingListener(new DialogCall.OnLoadingListener() {
                     @Override
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.bt_FristLoading)
     public void onFristLoadingClick() {
-        new GankImpl()
+        Diycode.getInstance()
                 .getPics("5", "5")
                 .firstLoading(LoadingLayout.wrap(llRoot))
                 .enqueue(new Callback<MeiZiData>() {
