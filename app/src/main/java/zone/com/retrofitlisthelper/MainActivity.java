@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -40,25 +41,31 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.bt_rxjavaSync)
     public void onRxjavaSyncClick() {
         Diycode.getInstance()
-                .getPics("5", "2",2)
+                .getPics("5", "2", 2)
                 .popWindow(new LoadingPopWindow(this))
                 .delayDismiss(5000)
                 .enqueueObservable()
                 .subscribe(o -> System.out.println("Sync 妹子==>：" + GsonUtils.toJson(o))
                         , throwable -> System.out.println("Sync 异常==>" + throwable)
-                        , () -> System.out.println("Sync 成功==>"));
+                        , () -> {
+                            toastSuccess();
+                            System.out.println("Sync 成功==>");
+                        });
     }
 
     @OnClick(R.id.bt_rxjava)
     public void onRxjavaClick() {
         Diycode.getInstance()
-                .getPics( "5", "2",2)
+                .getPics("5", "2", 2)
                 .executeObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(o -> System.out.println("同步 妹子==>：" + GsonUtils.toJson(o))
                         , throwable -> System.out.println("同步  异常==>" + throwable)
-                        , () -> System.out.println("同步  成功==>"));
+                        , () -> {
+                            toastSuccess();
+                            System.out.println("同步  成功==>");
+                        });
     }
 
     @OnClick(R.id.bt_pop)
@@ -71,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<MeiZiData> call, Response<MeiZiData> response) {
                         //UI线程
+                        toastSuccess();
                         System.out.println("pop==>onResponse");
                     }
 
@@ -79,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println("pop==>onFailure");
                     }
                 });
+    }
+
+    private void toastSuccess() {
+        Toast.makeText(MainActivity.this, "success!", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.bt_Dlg)
@@ -90,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<MeiZiData> call, Response<MeiZiData> response) {
                         //UI线程
+                        toastSuccess();
                         System.out.println("dialog==>onResponse");
                     }
 
@@ -114,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case Success:
                             case Error:
+                                toastSuccess();
                                 HandlerUiUtil.postDelay(new Runnable() {
                                     @Override
                                     public void run() {
@@ -145,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 .enqueue(new Callback<MeiZiData>() {
                     @Override
                     public void onResponse(Call<MeiZiData> call, Response<MeiZiData> response) {
+                        toastSuccess();
                         System.out.println("onFristLoadingClick==>onResponse");
                     }
 

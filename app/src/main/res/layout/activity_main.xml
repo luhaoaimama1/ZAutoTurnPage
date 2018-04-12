@@ -9,7 +9,7 @@
         android:id="@+id/bt_pop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pop" />
+        android:text="Pop 获取数据后延迟5秒消失" />
 
     <Button
         android:id="@+id/bt_Dlg"
@@ -26,7 +26,7 @@
         android:id="@+id/bt_DelayDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="delayDialog" />
+        android:text="delayDialog 延迟2秒消失" />
     <Button
         android:id="@+id/bt_List"
         android:layout_width="match_parent"

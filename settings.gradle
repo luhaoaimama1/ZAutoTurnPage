@@ -1,1 +1,1 @@
-include ':app', ':retrofitHelper', ':retrofitLib', ':sdk', ':zhelper'
+include ':app', ':retrofitHelper', ':retrofitLib', ':sdk', ':zhelper', ':apt', ':aptlib'
