@@ -1,0 +1,10 @@
+apply plugin: 'java'
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
+dependencies {
+    //    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //        compile 'com.github.luhaoaimama1:AnnotationStudy:1.0.8'
+    compile project(':aptlib')
+}
+
