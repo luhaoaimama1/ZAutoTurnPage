@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 //apply plugin: 'com.novoda.bintray-release'//添加
 // JitPack Maven
@@ -8,16 +10,14 @@ group = 'com.github.luhaoaimama1'
 
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -29,60 +29,35 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestApi('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    testCompile 'junit:junit:4.12'
+    api 'androidx.appcompat:appcompat:1.0.0'
+    testApi 'junit:junit:4.12'
 
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    api 'com.squareup.retrofit2:retrofit:2.3.0'
+    api 'com.squareup.retrofit2:converter-gson:2.1.0'
     // 版本问题 :https://stackoverflow.com/questions/41140203/using-rxjava-2-and-retrofit-2-adapter-version-issue
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0' // works with RxJava 2
-//    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0' // won't work with RxJava 2
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.2.0' // works with RxJava 2
+//    api 'com.squareup.retrofit2:adapter-rxjava:2.1.0' // won't work with RxJava 2
 
-    compile 'com.squareup.okhttp3:okhttp:3.6.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    api 'com.squareup.okhttp3:okhttp:3.6.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.6.0'
 
 // Because RxAndroid releases are few and far between, it is recommended you also
 // explicitly depend on RxJava's latest version for bug fixes and new features.
-    compile 'io.reactivex.rxjava2:rxjava:2.1.1'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'com.github.czy1121:loadinglayout:1.0.1'
+    api 'io.reactivex.rxjava2:rxjava:2.1.1'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    api 'com.github.czy1121:loadinglayout:1.0.1'
 
-    compile 'com.facebook.stetho:stetho:1.5.0'
-    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    api 'com.facebook.stetho:stetho:1.5.0'
+    api 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    api "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-//    compile project(':retrofitHelper')
+//    api project(':retrofitHelper')
 }
-
-
-
-
-//---------------jitPack 文档注释 Start------------------------
-// build a jar with source files
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
+repositories {
+    mavenCentral()
 }
-
-task javadoc(type: Javadoc) {
-    failOnError false
-    source = android.sourceSets.main.java.sourceFiles
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    classpath += configurations.compile
-}
-
-// build a jar with javadoc
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-}
-
-

@@ -1,6 +1,6 @@
 package zone.com.sdk.base.extra;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.IOException;
 

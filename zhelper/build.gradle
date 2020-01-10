@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 //apply plugin: 'com.novoda.bintray-release'//添加
 // JitPack Maven
 apply plugin: 'com.github.dcendents.android-maven'
@@ -7,16 +9,14 @@ group = 'com.github.luhaoaimama1'
 
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -28,43 +28,26 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestApi('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    testCompile 'junit:junit:4.12'
+    api 'androidx.appcompat:appcompat:1.0.0'
+    testApi 'junit:junit:4.12'
     //    compile 'com.github.luhaoaimama1:ZRefreshLayout:1.0.15'
-    compile 'com.github.luhaoaimama1:ZAdapter3:1.0.2'
-    compile('com.github.luhaoaimama1:ZRefreshLayout:1.0.15', {
+//    api 'com.github.luhaoaimama1:ZAdapter3:1.0.94'
+    api'com.github.luhaoaimama1:ZAdapter3KT:2.0.2'
+    api('com.github.luhaoaimama1:ZRefreshLayout:1.0.15', {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     })
     //    compile project(':zlibrary')
-    compile project(':retrofitHelper')
+    api project(':retrofitHelper')
+    api "androidx.core:core-ktx:+"
+    compileOnly  'androidx.recyclerview:recyclerview:1.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
 
 
-//---------------jitPack 文档注释 Start------------------------
-// build a jar with source files
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-    failOnError false
-    source = android.sourceSets.main.java.sourceFiles
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    classpath += configurations.compile
-}
-
-// build a jar with javadoc
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-}

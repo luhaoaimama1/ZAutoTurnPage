@@ -23,7 +23,7 @@
 package zone.com.sdk.base.extra;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import zone.com.sdk.API.token.bean.Token;
 import zone.com.retrofitlib.utils.ACache;

@@ -1,7 +1,7 @@
 package zone.com.retrofitlib.callwrapper;
 
 import android.app.Dialog;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.View;
 import java.io.IOException;
 import ezy.ui.layout.LoadingLayout;
