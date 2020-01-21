@@ -34,17 +34,14 @@ dependencies {
     })
     api 'androidx.appcompat:appcompat:1.0.0'
     testApi 'junit:junit:4.12'
-    //    compile 'com.github.luhaoaimama1:ZRefreshLayout:1.0.15'
-//    api 'com.github.luhaoaimama1:ZAdapter3:1.0.94'
-    api'com.github.luhaoaimama1:ZAdapter3KT:2.0.2'
-    api('com.github.luhaoaimama1:ZRefreshLayout:1.0.15', {
-        exclude group: 'com.android.support', module: 'recyclerview-v7'
-    })
+    api'com.github.luhaoaimama1:ZAdapter3KT:2.0.5'
+//    api project(':zadapter3')
+    api('com.github.luhaoaimama1:ZRefreshLayout:2.0.5')
     //    compile project(':zlibrary')
     api project(':retrofitHelper')
     api "androidx.core:core-ktx:+"
     compileOnly  'androidx.recyclerview:recyclerview:1.0.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 repositories {
     mavenCentral()

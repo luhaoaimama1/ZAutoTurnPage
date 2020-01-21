@@ -2,13 +2,13 @@ package zone.com.retrofitlisthelper;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import ezy.ui.layout.LoadingLayout;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -23,10 +23,9 @@ import zone.com.sdk.API.gank.bean.MeiZiData;
 import zone.com.retrofitlisthelper.utils.GsonUtils;
 import zone.com.sdk.Diycode;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    @Bind(R.id.ll_root)
     LinearLayout llRoot;
 
     @Override
@@ -34,11 +33,39 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        llRoot = findViewById(R.id.ll_root);
+
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt_rxjavaSync:
+                onRxjavaSyncClick();
+                break;
+            case R.id.bt_rxjava:
+                onRxjavaClick();
+                break;
+            case R.id.bt_pop:
+                onPopClick();
+                break;
+            case R.id.bt_Dlg:
+                onDlgClick();
+                break;
+            case R.id.bt_DelayDialog:
+                onDelayDialogClick();
+                break;
+            case R.id.bt_FristLoading:
+                onFristLoadingClick();
+                break;
 
-    @OnClick(R.id.bt_rxjavaSync)
+            case R.id.bt_List:
+                onListClick();
+                break;
+
+        }
+    }
+
     public void onRxjavaSyncClick() {
         Diycode.getInstance()
                 .getPics("5", "2", 2)
@@ -53,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                         });
     }
 
-    @OnClick(R.id.bt_rxjava)
     public void onRxjavaClick() {
         Diycode.getInstance()
                 .getPics("5", "2", 2)
@@ -68,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                         });
     }
 
-    @OnClick(R.id.bt_pop)
     public void onPopClick() {
         Diycode.getInstance()
                 .getPics("5", "5")
@@ -93,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, "success!", Toast.LENGTH_SHORT).show();
     }
 
-    @OnClick(R.id.bt_Dlg)
     public void onDlgClick() {
         Diycode.getInstance()
                 .getPics("5", "5")
@@ -113,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    @OnClick(R.id.bt_DelayDialog)
     public void onDelayDialogClick() {
         final LoadingDialog dialog = new LoadingDialog(this);
         Diycode.getInstance()
@@ -151,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    @OnClick(R.id.bt_FristLoading)
     public void onFristLoadingClick() {
         Diycode.getInstance()
                 .getPics("5", "5")
@@ -170,7 +192,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    @OnClick(R.id.bt_List)
     public void onListClick() {
         startActivity(new Intent(this, ListActivity.class));
 

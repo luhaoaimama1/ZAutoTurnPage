@@ -10,9 +10,9 @@ import java.lang.reflect.Method;
  */
 public class DyHandler2 implements InvocationHandler {
     //要代理的原始对象
-    private zone.com.sdk.Diycode$$Api obj;
+    private zone.com.sdk.Diycode_Api obj;
 
-    public DyHandler2(zone.com.sdk.Diycode$$Api obj) {
+    public DyHandler2(zone.com.sdk.Diycode_Api obj) {
         super();
         this.obj = obj;
 

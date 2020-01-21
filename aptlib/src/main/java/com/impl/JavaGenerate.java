@@ -1,13 +1,7 @@
-package com.example;
+package com.impl;
 
-import com.example.entity.ClassEntity;
-import com.example.entity.FieldEntity;
-import com.example.entity.MethodEntity;
-
-import com.example.entity.ClassEntity;
-
-import java.lang.annotation.Annotation;
-import java.util.Map;
+import com.example.ZClass;
+import com.zone.apt.entity.ClassEntity;
 
 import javax.lang.model.element.Element;
 
@@ -16,7 +10,7 @@ import javax.lang.model.element.Element;
  */
 
 public class JavaGenerate {
-//// Generated code from Butter Knife. Do not modify!
+//// Generated code from Butter Knife. Do not modify!modify
 //    package com.shenxian.jizhang.acvitiy;
 //
 //    import android.view.View;

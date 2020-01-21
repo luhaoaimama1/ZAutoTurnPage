@@ -21,8 +21,8 @@ import zone.com.sdk.API.gank2.api.Gank2Impl;
         @Entity2(cla = Gank2API.class, obj = Gank2Impl.class)})
 public class Diycode {
 
-    public static synchronized zone.com.sdk.Diycode$$Injector getInstance() {
-        return zone.com.sdk.Diycode$$Api.getInstance();
+    public static synchronized zone.com.sdk.Diycode_Injector getInstance() {
+        return zone.com.sdk.Diycode_Api.getInstance();
     }
 
 
