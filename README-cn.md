@@ -15,9 +15,9 @@ Add it in your root build.gradle at the end of repositories:
 	}
 Step 2. Add the dependency
 * 总览
-    * compile 'com.github.luhaoaimama1.ZAutoTurnPage:autoturnpage:[Latest release](https://github.com/luhaoaimama1/ZAutoTurnPage/releases)'
+    * implementation 'com.github.luhaoaimama1.ZAutoTurnPage:autoturnpage:[Latest release](https://github.com/luhaoaimama1/ZAutoTurnPage/releases)'
 
-    * compile 'com.github.luhaoaimama1.ZAutoTurnPage:zrefreshTurnPage:[Latest release](https://github.com/luhaoaimama1/ZAutoTurnPage/releases)'
+    * implementation 'com.github.luhaoaimama1.ZAutoTurnPage:zrefreshTurnPage:[Latest release](https://github.com/luhaoaimama1/ZAutoTurnPage/releases)'
 
 # 功能介绍
 
