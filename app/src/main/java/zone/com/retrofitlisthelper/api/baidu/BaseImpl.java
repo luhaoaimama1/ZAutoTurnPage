@@ -20,7 +20,7 @@
  * Weibo:   http://weibo.com/GcsSloop
  */
 
-package zone.com.retrofitlisthelper.api.gank;
+package zone.com.retrofitlisthelper.api.baidu;
 
 import java.util.concurrent.TimeUnit;
 

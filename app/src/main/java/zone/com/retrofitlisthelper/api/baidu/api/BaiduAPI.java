@@ -20,13 +20,13 @@
  * Weibo:   http://weibo.com/GcsSloop
  */
 
-package zone.com.retrofitlisthelper.api.gank.api;
+package zone.com.retrofitlisthelper.api.baidu.api;
 
 
 import zone.com.okhttplib.java.callwrapper.DialogCall;
-import zone.com.retrofitlisthelper.api.gank.bean.MeiZiData;
+import zone.com.retrofitlisthelper.api.baidu.bean.MeiZiData;
 
-public interface GankAPI {
+public interface BaiduAPI {
 
     //--- login ------------------------------------------------------------------------------------
 

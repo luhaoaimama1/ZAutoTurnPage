@@ -20,22 +20,22 @@
  * Weibo:   http://weibo.com/GcsSloop
  */
 
-package zone.com.retrofitlisthelper.api.gank.api;
+package zone.com.retrofitlisthelper.api.baidu.api;
 
 //ListHelper.bindEngine()
 
 import zone.com.okhttplib.java.callwrapper.DialogCall;
-import zone.com.retrofitlisthelper.api.gank.BaseImpl;
-import zone.com.retrofitlisthelper.api.gank.bean.MeiZiData;
+import zone.com.retrofitlisthelper.api.baidu.BaseImpl;
+import zone.com.retrofitlisthelper.api.baidu.bean.MeiZiData;
 
 /**
- *GankImpl.pop(listener{
+ *BaiduImpl.pop(listener{
  *
  *})
  *
  * getPics(String limit, String pageNumber).pop/dialog/popListener().enquene(callback());
  */
-public class GankImpl extends BaseImpl<GankService> implements GankAPI {
+public class BaiduImpl extends BaseImpl<BaiduService> implements BaiduAPI {
 
     @Override
     public DialogCall<MeiZiData> getPics(String limit, String pageNumber) {

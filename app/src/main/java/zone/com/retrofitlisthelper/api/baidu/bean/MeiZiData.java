@@ -1,4 +1,4 @@
-package zone.com.retrofitlisthelper.api.gank.bean;
+package zone.com.retrofitlisthelper.api.baidu.bean;
 
 import java.util.List;
 
