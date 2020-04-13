@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/id_num"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="300dp"
         android:background="#99b4f9"
         android:scaleType="centerCrop" />
 

@@ -1,4 +1,4 @@
-# RetrofitListHelper
+# ZAutoTurnPage
 
 # Usage
 
@@ -13,130 +13,40 @@ Add it in your root build.gradle at the end of repositories:
 	}
 Step 2. Add the dependency
 * 总览
-    * compile 'com.github.luhaoaimama1.RetrofitListHelper:retrofitLib:[Latest release](https://github.com/luhaoaimama1/ZAdapter3/releases)'
+    * compile 'com.github.luhaoaimama1.ZAutoTurnPage:autoturnpage:[Latest release](https://github.com/luhaoaimama1/ZAutoTurnPage/releases)'
 
-    * compile 'com.github.luhaoaimama1.RetrofitListHelper:retrofitHelper:[Latest release](https://github.com/luhaoaimama1/ZAdapter3/releases)'
-
-    * compile 'com.github.luhaoaimama1.RetrofitListHelper:zhelper:[Latest release](https://github.com/luhaoaimama1/ZAdapter3/releases)'
-
-> 注意:zhelper依赖retrofitHelper,retrofitHelper依赖retrofitLib ,所以你选一个即可!
+    * compile 'com.github.luhaoaimama1.ZAutoTurnPage:zrefreshTurnPage:[Latest release](https://github.com/luhaoaimama1/ZAutoTurnPage/releases)'
 
 # 功能介绍
 
-## retrofitLib
+## autoturnpage
 
--[x] 网络请求库 支持上传下载 https cookies等;
+翻页的抽象类 用于包装抽象的 adapter 刷新框框架 数据的绑定。
 
--[x] 支持rxjava2
+> 网络请求默认用retrofit了
 
--[x] 可以与dialog pop view等进行请求关联
+为什么adapter，刷新框框架 抽象出来？ 如果经常开新的app,意味着刷新或者adapter框架可能会改变。那么继承这个类 实现对应的功能即可更换
 
--[x] firstLoad那种 网络状态关联;
+## zrefreshTurnPage
 
-## retrofitHelper
-
-一个下拉刷新与上拉加载自动完成抽象库；
-
-## zhelper
-
-retrofitHelper的库的具体实现
-
-*   下拉刷新上拉加载采用:ZRefresh
-*   adapter采用:ZAdapter3
-
+这个是一个完整的实现。adapter和刷新框架都是用我自己的
 
 # Easy use:
 
-使用之前配置
+
+下拉刷新与上拉加载的自动完成
 
 ```
- Config.getInstance().setContext(this);
-```
-
-1.pop关联范例:
-
-```
-   Diycode.getInstance()
-                 .getPics("5", "5")
-                 .popWindow(new LoadingPopWindow(this))
-                 .delayDismiss(5000)
-                 .enqueue(new Callback<MeiZiData>() {
-                     @Override
-                     public void onResponse(Call<MeiZiData> call, Response<MeiZiData> response) {
-                         //UI线程
-                         System.out.println("pop==>onResponse");
-                     }
-
-                     @Override
-                     public void onFailure(Call<MeiZiData> call, Throwable t) {
-                         System.out.println("pop==>onFailure");
-                     }
-                 });
-```
-
-2.rxjava2支持
-
-```
-  Diycode.getInstance()
-                .getPics("5", "2",2)
-                .popWindow(new LoadingPopWindow(this))
-                .delayDismiss(5000)//想让进度条显示的久一点
-                .enqueueObservable()
-                .subscribe(o -> System.out.println("Sync 妹子==>：" + GsonUtils.toJson(o))
-                        , throwable -> System.out.println("Sync 异常==>" + throwable)
-                        , () -> System.out.println("Sync 成功==>"));
-```
-
-3.firstLoad状态与界面关联
-
-```
-    Diycode.getInstance()
-                .getPics("5", "5")
-                .firstLoading(LoadingLayout.wrap(llRoot))
-                .enqueue(new Callback<MeiZiData>() {
-                    @Override
-                    public void onResponse(Call<MeiZiData> call, Response<MeiZiData> response) {
-                        System.out.println("onFristLoadingClick==>onResponse");
-                    }
-
-                    @Override
-                    public void onFailure(Call<MeiZiData> call, Throwable t) {
-                        System.out.println("onFristLoadingClick==>onFailure");
-                    }
-                });
-```
-
-4.下拉刷新与上拉加载的自动完成
-
-```
-
-        final ZonePullView zonePullView = new ZonePullView<MeiZiData>(refresh, adapter) {
-            @NonNull
-            @Override
-            protected Call<MeiZiData> request(int offset, int limit) {
-                return Diycode.getInstance()
-                        .getPics(offset + "", limit + "");
+   zonePullView = object : ZonePullView<MeiZiData>(refresh, adapter!!) {
+            override fun request(offset: OffsetWarpper, limit: Int): Call<MeiZiData> {
+                //对应某个页面用什么请求 这个可以自己更改
+                return BaiduImpl().getPics(limit.toString(), (offset.get() * limit).toString())
             }
 
-            @Override
-            protected void handleData(int offset, MeiZiData body) {
-                datas.addAll(body.getResults());
+            override fun handleData(offset: OffsetWarpper, body: MeiZiData?) {
+                //用于处理 返回回来的数据
+                this@ListActivity.adapter?.add(data)
+                setTurnPageTv(offset, data.size)
             }
-        };
+        }
 ```
-
-# 项目实践
-
-https://github.com/NewbeeMaster/NBDiycode
-
-# Update log
-
->由于每个版本更新的东西较多，所以从现在开始每个版本都会贴上更新日志.
-
-## 1.0.2
-
-  * 1.初始完成
-
-
-# Reference&Thanks：
-https://github.com/GcsSloop/diycode
