@@ -1,5 +1,7 @@
 # ZAutoTurnPage
 
+一个可以随意更换 adapter与刷新加载框架的自动翻页库
+
 # Usage
 
 ### JicPack

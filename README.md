@@ -2,6 +2,8 @@
 #### [中文版文档](./README-cn.md)
 # ZAutoTurnPage
 
+An automatic page-turning library that can change adapter and refresh the loading frame at will
+
 # Usage
 
 ### JicPack
